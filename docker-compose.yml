@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  backend:
+    build: backend/
+    command: python manage.py runserver 0.0.0.0:50000
+    volumes:
+      - ./backend:/home/root/web_app_tracker/backend
+    ports:
+      - 50000:50000
+    env_file:
+      - backend/.env.dev
+  frontend:
+    build: frontend/
+    command: npm run serve -- --port 8080
+    volumes:
+      - ./frontend:/home/root/web_app_tracker/frontend
+      - /home/root/web_app_tracker/frontend/node_modules
+    ports:
+      - 8080:8080
+#    env_file:
+#      - frontend/.env.dev
